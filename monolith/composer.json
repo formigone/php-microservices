@@ -1,0 +1,11 @@
+{
+  "repositories": [
+    {
+      "url": "https://github.com/formigone/th.git",
+      "type": "git"
+    }
+  ],
+  "require": {
+    "formigone/th": "*"
+  }
+}

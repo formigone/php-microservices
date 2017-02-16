@@ -1,0 +1,29 @@
+[
+    {
+        "name": "formigone/th",
+        "version": "v1.0",
+        "version_normalized": "1.0.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/formigone/th.git",
+            "reference": "7b5eac80d95e24a66903fb5cd71edd293bd73c8f"
+        },
+        "time": "2017-02-16T13:39:06+00:00",
+        "type": "project",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "Th\\": "src"
+            }
+        },
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Rodrigo Silveira",
+                "email": "webmaster@rodrigo-silveira.com"
+            }
+        ]
+    }
+]

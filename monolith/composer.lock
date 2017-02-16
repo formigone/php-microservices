@@ -1,0 +1,43 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "644f5e0d4a68bc419b1e4283baefd223",
+    "packages": [
+        {
+            "name": "formigone/th",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/formigone/th.git",
+                "reference": "7b5eac80d95e24a66903fb5cd71edd293bd73c8f"
+            },
+            "type": "project",
+            "autoload": {
+                "psr-4": {
+                    "Th\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rodrigo Silveira",
+                    "email": "webmaster@rodrigo-silveira.com"
+                }
+            ],
+            "time": "2017-02-16T13:39:06+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
