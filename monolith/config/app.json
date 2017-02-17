@@ -1,0 +1,8 @@
+{
+  "twig": {
+    "path": "/app/views"
+  },
+  "log": {
+    "path": "/logs/development.log"
+  }
+}
