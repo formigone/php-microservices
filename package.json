@@ -1,0 +1,13 @@
+{
+  "name": "php-microservices",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "monolith": "docker run --rm -d -p 8080:80 php:7.0-apache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/formigone/php-microservices.git"
+  },
+  "author": "Rodrigo Silveira"
+}
