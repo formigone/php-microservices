@@ -1,0 +1,8 @@
+<div class="jumbotron top-article" style="background-image: url({{ story.img }});">
+    <h1 class="title">
+        <a href="/read/{{ story.id }}/{{ story.slug }}">{{ story.title }}</a>
+    </h1>
+    {% if story.breaking %}
+        <span class="breaking">Breaking news</span>
+    {% endif %}
+</div>

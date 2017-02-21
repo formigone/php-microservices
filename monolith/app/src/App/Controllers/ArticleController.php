@@ -7,12 +7,12 @@ use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
 /**
- * Class IndexController
- * @package KSLWeb\Controllers
+ * Class ArticleController
+ * @package App\Controllers
  */
-class IndexController implements ControllerProviderInterface
+class ArticleController implements ControllerProviderInterface
 {
-    const MAIN_TEMPLATE = 'homepage.html.twig';
+    const MAIN_TEMPLATE = 'article.html.twig';
 
     /** @var ArticleService */
     private $service;
@@ -29,14 +29,16 @@ class IndexController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
-        $controller->get('/', function (Application $app) {
+        $controller->get('/{story}/{title}', function (array $story) use ($app) {
             $data = [
-                'mainStory' => $this->service->getMainStory(),
-                'headlines' => $this->service->getStories(100),
-                'trending' => $this->service->getStories(5),
+                'story' => $story,
             ];
             return $app['templating']->render(self::MAIN_TEMPLATE, $data);
+        })->convert('story', function ($storyId) {
+            $story = $this->service->getStoryById($storyId);
+            return $story;
         });
+
         return $controller;
     }
 }

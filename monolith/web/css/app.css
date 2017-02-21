@@ -71,6 +71,11 @@ footer {
     color: #fff;
 }
 
+.top-article .title a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .top-article .breaking {
     background: #c00;
     font-size: 2em;

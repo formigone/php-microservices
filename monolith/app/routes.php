@@ -1,5 +1,9 @@
 <?php
 
 use \App\Controllers\IndexController;
+use \App\Controllers\ArticleController;
 
-$app->mount('/', new IndexController());
+$articleService = new \App\Services\ArticleService();
+
+$app->mount('/', new IndexController($articleService));
+$app->mount('/read', new ArticleController($articleService));
