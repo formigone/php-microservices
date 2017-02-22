@@ -1,72 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="">
-    <meta name="author" content="">
+{% extends 'base.html.twig' %}
 
-    <title>Formigone News</title>
+{% block title %}{{ story.title }}{% endblock %}
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/app.css" rel="stylesheet">
-</head>
-
-<body>
-<nav class="navbar navbar-fixed-top navbar-inverse">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">
-                <img src="/img/logo.png" class="company-logo" />
-            </a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container -->
-</nav><!-- /.navbar -->
-
-<div class="container">
-
-    <div class="row row-offcanvas row-offcanvas-right">
-        <div class="col-xs-12 col-sm-9">
-            <p class="pull-right visible-xs">
-                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-            </p>
-
-            <h1>{{ story.title }}</h1>
-
-        </div>
-
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas">
+{% block main %}
+    <div class="story-poster">
+        <img src="{{ story.img }}" class="img-responsive" alt="{{ story.title }}" />
+        <div class="story-poster-text">
+            <h3 class="date">{{ story.date | date('l, F j, g:m a') }}</h3>
+            <h1 class="title">{{ story.title }}</h1>
         </div>
     </div>
 
-    <hr>
+    <hr />
 
-    <footer>
-        <p>&copy; 2017 Formigone News. No rights reserved.</p>
-    </footer>
+    <blockquote class="summary">{{ story.summary }}</blockquote>
 
-</div><!--/.container-->
+    <a href="#comments" class="btn btn-default">
+        <span class="fa fa-comments text-primary"></span>
+        <span class="badge">{{ comments | length }}</span>
+    </a>
 
-<script>
-  setTimeout(function () {
-    document.querySelector('.top-article').classList.add('on');
-  }, 0);
-</script>
-</body>
-</html>
+    <a href="#share" class="btn btn-default">
+        <span class="fa fa-share-alt text-primary"></span>
+    </a>
+
+    <a href="#share" class="btn btn-default">
+        <span class="fa fa-print text-primary"></span>
+    </a>
+
+    <hr />
+
+    {% for paragraph in story.body %}
+        <p>{{ paragraph }}</p>
+    {% endfor %}
+
+    {{ include('components/recommendations.html.twig', { 'stories': recommendations }, with_context = false) }}
+
+    <a name="comments"></a>
+    <p></p>
+    {{ include('components/comments.html.twig', { 'comments': comments }, with_context = false) }}
+
+{% endblock %}
+
+{% block side %}
+{% endblock %}
+
+{% block js %}
+{% endblock %}
+

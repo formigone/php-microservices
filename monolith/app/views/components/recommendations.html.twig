@@ -1,0 +1,19 @@
+<div class="well">
+    <h1>Recommendations</h1>
+    <hr />
+
+    <div class="row">
+        {% for story in stories %}
+            <div class="col-md-4 col-sm-12">
+                <div class="thumbnail">
+                    <img src="{{ story.img }}" alt="{{ story.title }}">
+                    <div class="caption">
+                        <h3>
+                            <a href="/read/{{ story.id }}/{{ story.slug }}">{{ story.title }}</a>
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

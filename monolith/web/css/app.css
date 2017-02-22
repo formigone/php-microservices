@@ -65,10 +65,11 @@ footer {
     background-size: 100%;
 }
 
-.top-article .title {
+.top-article .title, .story-poster .title, .story-poster-text .date {
     background: rgba(0, 0, 0, 0.75);
     padding: 5px 10px;
     color: #fff;
+    display: inline-block;
 }
 
 .top-article .title a {
@@ -97,4 +98,88 @@ footer {
 
 .queue-item .title {
     margin-top: 0 !important;;
+}
+
+.story-poster {
+    position: relative;
+}
+
+.story-poster-text {
+    position: absolute;
+    bottom: 0;
+    padding: 50px;
+    text-align: center;
+}
+
+.story-poster-text .title {
+    font-size: 4em;
+    margin: 0;
+    width: 100%;
+}
+
+.story-poster-text .date {
+    font-size: 1.25em;
+    color: #c00;
+    margin: 0;
+    width: 100%;
+    padding: 20px;
+}
+
+.comment .avatar {
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    position: relative;
+}
+
+.comment .avatar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+}
+
+.comment .avatar .__proto {
+    top: -23px;
+    left: -13px;
+}
+
+.comment .avatar .__magnettum {
+    top: -23px;
+    left: -154px;
+}
+
+.comment .avatar .__roll {
+    top: -23px;
+    left: -82px;
+}
+
+.comment .avatar .__drCossak {
+    top: -108px;
+    left: -13px;
+}
+
+.comment .avatar .__drWylls {
+    top: -108px;
+    left: -82px;
+}
+
+.comment .avatar .__eddie {
+    top: -108px;
+    left: -154px;
+}
+
+.comment .avatar .__beatsy {
+    top: -108px;
+    left: -226px;
+}
+
+.comment .avatar .__sparks {
+    top: -195px;
+    left: -13px;
+}
+
+.comment .avatar .__rock {
+    top: -195px;
+    left: -154px;
 }

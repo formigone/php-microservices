@@ -1,0 +1,49 @@
+<hr />
+<h1>Comments</h1>
+<hr />
+
+{% if comments is not empty %}
+<div class="row">
+    {% for comment in comments %}
+        <div class="media comment">
+            <div class="media-left">
+                <a href="#">
+                    <div class="avatar">
+                        <img class="media-object __{{ comment.author }}" src="/img/users.jpg" alt="{{ comment.author }}">
+                    </div>
+                </a>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">{{ comment.author }}</h4>
+                {% for paragraph in comment.text %}
+                    <p>{{ paragraph }}</p>
+                {% endfor %}
+
+                {{ include('components/comment-actions.html.twig') }}
+
+                {% for reply in comment.children %}
+                <div class="media comment">
+                    <div class="media-left">
+                        <a href="#">
+                            <div class="avatar">
+                                <img class="media-object __{{ reply.author }}" src="/img/users.jpg" alt="{{ reply.author }}">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="media-body">
+                        <h4 class="media-heading">{{ reply.author }}</h4>
+                        {% for paragraph in reply.text %}
+                            <p>{{ paragraph | capitalize }}</p>
+                        {% endfor %}
+
+                        {{ include('components/comment-actions.html.twig') }}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="alert alert-info">The are no comments on this story yet...</p>
+{% endif %}

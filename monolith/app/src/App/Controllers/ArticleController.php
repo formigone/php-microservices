@@ -30,8 +30,17 @@ class ArticleController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/{story}/{title}', function (array $story) use ($app) {
+            $recommendations = $this->service->getStories(4);
+            $recommendations = array_filter($recommendations, function ($row) use ($story) {
+                return $row['id'] !== $story['id'];
+            });
+            $recommendations = array_slice($recommendations, 0, 3);
+            $comments = $this->service->genRandomComments();
+
             $data = [
                 'story' => $story,
+                'comments' => $comments,
+                'recommendations' => $recommendations,
             ];
             return $app['templating']->render(self::MAIN_TEMPLATE, $data);
         })->convert('story', function ($storyId) {
