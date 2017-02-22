@@ -2,6 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use \App\Controllers\IndexController;
+use \App\Controllers\ArticleController;
+use \App\Services\ArticleService;
+use \App\Providers\ArticleProvider;
+
 define('PRJ_ROOT', __DIR__ . '/..');
 
 $app = new Silex\Application();
@@ -18,11 +23,13 @@ $app['templating.engines'] = function () {
 };
 
 $app['templating.loader'] = function () {
-    return new Symfony\Component\Templating\Loader\FilesystemLoader(__DIR__ . '/views/%name%');
+    return new Symfony\Component\Templating\Loader\FilesystemLoader([__DIR__ . '/views/%name%']);
 };
+
 $app['templating.template_name_parser'] = function () {
     return new Symfony\Component\Templating\TemplateNameParser();
 };
+
 $app['templating.engine.php'] = function ($app) {
     $engine = new Symfony\Component\Templating\PhpEngine(
         $app['templating.template_name_parser'],
@@ -31,9 +38,11 @@ $app['templating.engine.php'] = function ($app) {
     $engine->set(new Symfony\Component\Templating\Helper\SlotsHelper());
     return $engine;
 };
+
 $app['templating.engine.twig'] = function ($app) {
     return new Symfony\Bridge\Twig\TwigEngine($app['twig'], $app['templating.template_name_parser']);
 };
+
 $app['templating'] = function ($app) {
     $engines = [];
     foreach ($app['templating.engines'] as $i => $engine) {
@@ -42,6 +51,19 @@ $app['templating'] = function ($app) {
         }
     }
     return new Symfony\Component\Templating\DelegatingEngine($engines);
+};
+
+$app['articleService'] = function () {
+    $provider = new ArticleProvider();
+    return new ArticleService($provider);
+};
+
+$app['indexController'] = function () use ($app) {
+    return new IndexController($app['articleService']);
+};
+
+$app['articleController'] = function () use ($app) {
+    return new ArticleController($app['articleService']);
 };
 
 include __DIR__ . '/../app/routes.php';

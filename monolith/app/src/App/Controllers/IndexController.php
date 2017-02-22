@@ -30,13 +30,21 @@ class IndexController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/', function (Application $app) {
-            $data = [
-                'mainStory' => $this->service->getMainStory(),
-                'headlines' => $this->service->getStories(100),
-                'trending' => $this->service->getStories(5),
-            ];
-            return $app['templating']->render(self::MAIN_TEMPLATE, $data);
+            return $app['templating']->render(self::MAIN_TEMPLATE, $this->indexAction());
         });
+
         return $controller;
+    }
+
+    /**
+     * @return array
+     */
+    public function indexAction()
+    {
+        return [
+            'mainStory' => $this->service->getMainStory(),
+            'headlines' => $this->service->getStories(100),
+            'trending' => $this->service->getStories(5),
+        ];
     }
 }
