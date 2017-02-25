@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controllers;
+namespace Mic\Users\Controllers;
 
-use App\Services\UserService;
+use Mic\Users\Services\UserService;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;

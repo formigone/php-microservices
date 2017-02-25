@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services;
+namespace Mic\Users\Services;
 
-use App\Providers\UserProvider;
+use Mic\Users\Providers\UserProvider;
 
 class UserService
 {

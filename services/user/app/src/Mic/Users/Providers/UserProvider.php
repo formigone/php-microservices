@@ -1,9 +1,6 @@
 <?php
 
-namespace App\Providers;
-
-use Silex\Application;
-use Silex\Api\ControllerProviderInterface;
+namespace Mic\Users\Providers;
 
 class UserProvider
 {

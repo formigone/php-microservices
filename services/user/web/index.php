@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use \App\Controllers\IndexController;
-use \App\Services\UserService;
-use \App\Providers\UserProvider;
+use Mic\Users\Controllers\IndexController;
+use Mic\Users\Services\UserService;
+use Mic\Users\Providers\UserProvider;
 
 define('PRJ_ROOT', __DIR__ . '/..');
 

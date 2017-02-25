@@ -219,3 +219,23 @@ footer {
     border-radius: 1px;
     border: 1px solid #ccc;
 }
+
+.nav .form-control {
+    outline: none;
+    box-shadow: none;
+    border: 0;
+    border-bottom: 1px solid #555;
+    border-radius:0;
+    background: transparent;
+    color: #fff;
+    transition: all 0.5s;
+}
+
+.nav .form-control:focus {
+    border-color: #fff;
+    font-size: 1em;
+}
+
+.nav .form-control::-webkit-input-placeholder {
+    color: #555;
+}

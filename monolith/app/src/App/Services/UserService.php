@@ -21,4 +21,22 @@ class UserService
     {
         return $this->provider->getCurrentUser();
     }
+
+    public function login($username, $password)
+    {
+        $res = $this->provider->validate($username, $password);
+
+        if ($res) {
+            $_SESSION['user'] = [
+                'username' => $username,
+            ];
+        }
+
+        return $res;
+    }
+
+    public function logout()
+    {
+        return session_destroy();
+    }
 }

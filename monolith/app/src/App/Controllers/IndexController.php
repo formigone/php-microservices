@@ -6,6 +6,7 @@ use App\Services\ArticleService;
 use App\Services\UserService;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class IndexController
@@ -36,6 +37,19 @@ class IndexController implements ControllerProviderInterface
         $controller = $app['controllers_factory'];
         $controller->get('/', function (Application $app) {
             return $app['templating']->render(self::MAIN_TEMPLATE, $this->indexAction());
+        });
+
+        $controller->post('/login', function (Request $req) use ($app) {
+            $username = $req->get('username', '');
+            $password = $req->get('password', '');
+
+            $this->userService->login($username, $password);
+            return $app->redirect('/');
+        });
+
+        $controller->get('/logout', function (Request $req) use ($app) {
+            $this->userService->logout();
+            return $app->redirect('/');
         });
 
         return $controller;

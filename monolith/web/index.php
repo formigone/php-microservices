@@ -10,12 +10,14 @@ use \App\Services\UserService;
 use \App\Providers\UserProvider;
 
 define('PRJ_ROOT', __DIR__ . '/..');
+session_start();
 
 $app = new Silex\Application();
 
 $config = json_decode(file_get_contents(__DIR__ . '/../config/app.json'), true);
 
 $app['debug'] = getenv('APP_DEV') === 'development';
+
 $app->register(new Silex\Provider\TwigServiceProvider(), ['twig.path' => PRJ_ROOT . $config['twig']['path']]);
 $app['templating.engines'] = function () {
     return [
@@ -61,7 +63,8 @@ $app['articleService'] = function () {
 };
 
 $app['userService'] = function () {
-    $provider = new UserProvider();
+    $client = new \GuzzleHttp\Client();
+    $provider = new UserProvider($client);
     return new UserService($provider);
 };
 
