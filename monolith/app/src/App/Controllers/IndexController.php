@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\ArticleService;
+use App\Services\UserService;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
@@ -15,11 +16,15 @@ class IndexController implements ControllerProviderInterface
     const MAIN_TEMPLATE = 'homepage.html.twig';
 
     /** @var ArticleService */
-    private $service;
+    private $articleService;
 
-    public function __construct(ArticleService $service)
+    /** @var UserService */
+    private $userService;
+
+    public function __construct(ArticleService $articleService, UserService $userService)
     {
-        $this->service = $service;
+        $this->articleService = $articleService;
+        $this->userService = $userService;
     }
 
     /**
@@ -42,9 +47,10 @@ class IndexController implements ControllerProviderInterface
     public function indexAction()
     {
         return [
-            'mainStory' => $this->service->getMainStory(),
-            'headlines' => $this->service->getStories(100),
-            'trending' => $this->service->getStories(5),
+            'mainStory' => $this->articleService->getMainStory(),
+            'headlines' => $this->articleService->getStories(100),
+            'trending' => $this->articleService->getStories(5),
+            'user' => $this->userService->getCurrentUser(),
         ];
     }
 }

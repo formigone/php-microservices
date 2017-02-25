@@ -1,5 +1,11 @@
 {% extends 'base.html.twig' %}
 
+{% block userPane %}
+    {% if user is defined %}
+        {{ include('components/userPane.html.twig', { 'user': user }, with_context = false) }}
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     {{ include('components/mainStory.html.twig', { 'story': mainStory }, with_context = false ) }}
     {{ include('components/storyQueue.html.twig', { 'stories': headlines }, with_context = false ) }}

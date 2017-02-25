@@ -2,6 +2,12 @@
 
 {% block title %}{{ story.title }}{% endblock %}
 
+{% block userPane %}
+    {% if user is defined %}
+        {{ include('components/userPane.html.twig', { 'user': user }, with_context = false) }}
+    {% endif %}
+{% endblock %}
+
 {% block main %}
     <div class="story-poster">
         <img src="{{ story.img }}" class="img-responsive" alt="{{ story.title }}" />

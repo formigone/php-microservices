@@ -6,6 +6,8 @@ use \App\Controllers\IndexController;
 use \App\Controllers\ArticleController;
 use \App\Services\ArticleService;
 use \App\Providers\ArticleProvider;
+use \App\Services\UserService;
+use \App\Providers\UserProvider;
 
 define('PRJ_ROOT', __DIR__ . '/..');
 
@@ -58,12 +60,17 @@ $app['articleService'] = function () {
     return new ArticleService($provider);
 };
 
+$app['userService'] = function () {
+    $provider = new UserProvider();
+    return new UserService($provider);
+};
+
 $app['indexController'] = function () use ($app) {
-    return new IndexController($app['articleService']);
+    return new IndexController($app['articleService'], $app['userService']);
 };
 
 $app['articleController'] = function () use ($app) {
-    return new ArticleController($app['articleService']);
+    return new ArticleController($app['articleService'], $app['userService']);
 };
 
 include __DIR__ . '/../app/routes.php';

@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Services\ArticleService;
+use App\Services\UserService;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
@@ -15,11 +16,15 @@ class ArticleController implements ControllerProviderInterface
     const MAIN_TEMPLATE = 'article.html.twig';
 
     /** @var ArticleService */
-    private $service;
+    private $articleService;
 
-    public function __construct(ArticleService $service)
+    /** @var UserService */
+    private $userService;
+
+    public function __construct(ArticleService $articleService, UserService $userService)
     {
-        $this->service = $service;
+        $this->articleService = $articleService;
+        $this->userService = $userService;
     }
 
     /**
@@ -30,24 +35,29 @@ class ArticleController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
         $controller->get('/{story}/{title}', function (array $story) use ($app) {
-            $recommendations = $this->service->getStories(4);
-            $recommendations = array_filter($recommendations, function ($row) use ($story) {
-                return $row['id'] !== $story['id'];
-            });
-            $recommendations = array_slice($recommendations, 0, 3);
-            $comments = $this->service->genRandomComments();
-
-            $data = [
-                'story' => $story,
-                'comments' => $comments,
-                'recommendations' => $recommendations,
-            ];
-            return $app['templating']->render(self::MAIN_TEMPLATE, $data);
+            return $app['templating']->render(self::MAIN_TEMPLATE, $this->storyAction($story));
         })->convert('story', function ($storyId) {
-            $story = $this->service->getStoryById($storyId);
+            $story = $this->articleService->getStoryById($storyId);
             return $story;
         });
 
         return $controller;
+    }
+
+    public function storyAction(array $story)
+    {
+        $recommendations = $this->articleService->getStories(4);
+        $recommendations = array_filter($recommendations, function ($row) use ($story) {
+            return $row['id'] !== $story['id'];
+        });
+        $recommendations = array_slice($recommendations, 0, 3);
+        $comments = $this->articleService->genRandomComments();
+
+        return [
+            'story' => $story,
+            'comments' => $comments,
+            'recommendations' => $recommendations,
+            'user' => $this->userService->getCurrentUser(),
+        ];
     }
 }

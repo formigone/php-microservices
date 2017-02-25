@@ -132,6 +132,14 @@ footer {
     position: relative;
 }
 
+.nav .avatar {
+    width: 25px;
+    height: 25px;
+    overflow: hidden;
+    position: relative;
+    margin: 13px 0 0;
+}
+
 .comment .avatar img {
     position: absolute;
     top: 0;
@@ -182,4 +190,16 @@ footer {
 .comment .avatar .__rock {
     top: -195px;
     left: -154px;
+}
+
+.nav .avatar img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 125px;
+}
+
+.nav .avatar .__roco {
+    top: -153px;
+    left: -65px;
 }

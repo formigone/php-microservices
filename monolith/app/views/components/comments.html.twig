@@ -7,11 +7,11 @@
     {% for comment in comments %}
         <div class="media comment">
             <div class="media-left">
-                <a href="#">
-                    <div class="avatar">
+                <div class="avatar">
+                    <a href="#">
                         <img class="media-object __{{ comment.author }}" src="/img/users.jpg" alt="{{ comment.author }}">
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
             <div class="media-body">
                 <h4 class="media-heading">{{ comment.author }}</h4>
