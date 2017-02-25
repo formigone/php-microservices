@@ -46,8 +46,8 @@ class ArticleService
      */
     public function genRandomComments($total = -1)
     {
-        if ($total < 0) {
-            $total = mt_rand(0, 10);
+        if ($total < 1) {
+            $total = mt_rand(3, 6);
         }
 
         return $this->provider->genRandomComments($total);

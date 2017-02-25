@@ -169,7 +169,7 @@ class ArticleProvider
         $data = [];
 
         while ($paragraphs--) {
-            $len = mt_rand(10, 20);
+            $len = mt_rand(15, 25);
             $para = [];
             while ($len--) {
                 $para[] = $words[mt_rand(0, count($words) - 1)];
@@ -185,25 +185,18 @@ class ArticleProvider
      * @param bool $hasChildren
      * @return array
      */
-    public function genRandomComments($total = 0, $hasChildren = true)
+    public function genRandomComments($total = 1, $hasChildren = true)
     {
-        if ($total < 1) {
-            $total = mt_rand(0, 10);
-        }
-
         $comments = [];
+
         for ($i = 0; $i < $total; $i++) {
-            if ($hasChildren) {
-                $hasChildren = mt_rand(0, 10) > 4;
-            }
-            $totalChildren = mt_rand(1, 5);
+            $totalChildren = mt_rand(1, 3);
             $children = [];
 
             if ($hasChildren) {
-                while ($totalChildren--) {
-                    $children = $this->genRandomComments(1, false);
-                }
+                $children = $this->genRandomComments($totalChildren, false);
             }
+
             $comments[] = [
                 'author' => $this->genRandomUser(),
                 'children' => $children,

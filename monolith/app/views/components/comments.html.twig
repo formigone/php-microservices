@@ -1,5 +1,11 @@
 <hr />
 <h1>Comments</h1>
+
+<div class="row">
+    <div class="col-sm-12">
+        {{ include('components/comment-input.html.twig', { 'user': user }, with_context = false) }}
+    </div>
+</div>
 <hr />
 
 {% if comments is not empty %}
@@ -20,6 +26,7 @@
                 {% endfor %}
 
                 {{ include('components/comment-actions.html.twig') }}
+                <hr/>
 
                 {% for reply in comment.children %}
                 <div class="media comment">
@@ -37,9 +44,12 @@
                         {% endfor %}
 
                         {{ include('components/comment-actions.html.twig') }}
+                        <hr/>
                     </div>
                 </div>
                 {% endfor %}
+
+                {{ include('components/comment-input.html.twig', { 'user': user }, with_context = false) }}
             </div>
         </div>
     {% endfor %}

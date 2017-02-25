@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "monolith": "docker run --rm -d -it -p 8080:8080 -v \"$PWD\"/monolith:/app -e \"APP_DEV=development\" formigone/php7.0 /app/serve.sh"
+    "monolith": "docker run --rm -d -it -p 8080:8080 -v \"$PWD\"/monolith:/app -e \"APP_DEV=development\" formigone/php7.0 /app/serve.sh",
+    "user-service": "docker run --rm -d -it -p 8088:8080 -v \"$PWD\"/services/user:/app -e \"APP_DEV=development\" formigone/php7.0 /app/serve.sh"
   },
   "repository": {
     "type": "git",

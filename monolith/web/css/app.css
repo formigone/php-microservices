@@ -192,6 +192,11 @@ footer {
     left: -154px;
 }
 
+.comment .avatar .__roco {
+    top: -370px;
+    left: -154px;
+}
+
 .nav .avatar img {
     position: absolute;
     top: 0;
@@ -202,4 +207,15 @@ footer {
 .nav .avatar .__roco {
     top: -153px;
     left: -65px;
+}
+
+.comment {
+}
+
+.comment .input-lg {
+    width: 100%;
+    display: block;
+    height: 61px;
+    border-radius: 1px;
+    border: 1px solid #ccc;
 }
