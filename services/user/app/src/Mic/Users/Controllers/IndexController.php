@@ -30,9 +30,12 @@ class IndexController implements ControllerProviderInterface
     {
         $controller = $app['controllers_factory'];
 
-        $controller->get('/validate/{username}/{password}', function ($username, $password) {
+        $controller->post('/register', function (Request $req) {
+            $username = $req->get('username');
+            $password = $req->get('password');
+
             try {
-                $res = $this->userService->validate($username, $password);
+                $res = $this->userService->register($username, $password);
             } catch (\Exception $exception) {
                 return $this->error($exception->getMessage(), $exception->getCode());
             }
@@ -40,12 +43,9 @@ class IndexController implements ControllerProviderInterface
             return new JsonResponse(['success' => $res]);
         });
 
-        $controller->post('/register', function (Request $req) {
-            $username = $req->get('username');
-            $password = $req->get('password');
-
+        $controller->get('/validate/{username}/{password}', function ($username, $password) {
             try {
-                $res = $this->userService->register($username, $password);
+                $res = $this->userService->validate($username, $password);
             } catch (\Exception $exception) {
                 return $this->error($exception->getMessage(), $exception->getCode());
             }

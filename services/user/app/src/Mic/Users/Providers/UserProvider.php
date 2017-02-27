@@ -32,25 +32,6 @@ class UserProvider
      * @return bool
      * @throws \Exception
      */
-    public function validate($username, $password)
-    {
-        if (!array_key_exists($username, $this->data['users'])) {
-            throw new \Exception('Username not found', 400);
-        }
-
-        if ($this->data['users'][$username] !== $this->hash($password)) {
-            throw new \Exception('Invalid password', 400);
-        }
-
-        return true;
-    }
-
-    /**
-     * @param string $username
-     * @param string $password
-     * @return bool
-     * @throws \Exception
-     */
     public function register($username, $password)
     {
         if (array_key_exists($username, $this->data['users'])) {
@@ -64,6 +45,25 @@ class UserProvider
         $this->data['users'][$username] = $this->hash($password);
 
         return $this->save();
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     * @return bool
+     * @throws \Exception
+     */
+    public function validate($username, $password)
+    {
+        if (!array_key_exists($username, $this->data['users'])) {
+            throw new \Exception('Username not found', 400);
+        }
+
+        if ($this->data['users'][$username] !== $this->hash($password)) {
+            throw new \Exception('Invalid password', 400);
+        }
+
+        return true;
     }
 
     /**

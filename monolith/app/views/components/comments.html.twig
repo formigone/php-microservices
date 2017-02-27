@@ -49,7 +49,9 @@
                 </div>
                 {% endfor %}
 
-                {{ include('components/comment-input.html.twig', { 'user': user }, with_context = false) }}
+                {% if user is not empty %}
+                    {{ include('components/comment-input.html.twig', { 'user': user }, with_context = false) }}
+                {% endif %}
             </div>
         </div>
     {% endfor %}

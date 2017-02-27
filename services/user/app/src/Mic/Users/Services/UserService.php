@@ -19,9 +19,9 @@ class UserService
      * @param string $password
      * @return bool
      */
-    public function validate($username, $password)
+    public function register($username, $password)
     {
-        return $this->provider->validate($username, $password);
+        return $this->provider->register($username, $password);
     }
 
     /**
@@ -29,9 +29,9 @@ class UserService
      * @param string $password
      * @return bool
      */
-    public function register($username, $password)
+    public function validate($username, $password)
     {
-        return $this->provider->register($username, $password);
+        return $this->provider->validate($username, $password);
     }
 
     /**
