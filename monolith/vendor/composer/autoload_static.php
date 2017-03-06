@@ -8,6 +8,7 @@ class ComposerStaticInit251889ce0742eb7190e88e82b0f6ed10
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        'f54c9b5e988cab550b89236716b03511' => __DIR__ . '/..' . '/graylog2/gelf-php/src/check_technical_requirements.php',
         'c964ee0ededf28c96ebd9db5099ef910' => __DIR__ . '/..' . '/guzzlehttp/promises/src/functions_include.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
         '37a3dc5111fe8f707ab4c132ef1dbc62' => __DIR__ . '/..' . '/guzzlehttp/guzzle/src/functions_include.php',
@@ -31,11 +32,16 @@ class ComposerStaticInit251889ce0742eb7190e88e82b0f6ed10
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
         ),
+        'M' => 
+        array (
+            'Monolog\\' => 8,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
+            'Gelf\\' => 5,
         ),
         'A' => 
         array (
@@ -88,6 +94,10 @@ class ComposerStaticInit251889ce0742eb7190e88e82b0f6ed10
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
+        ),
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
@@ -99,6 +109,10 @@ class ComposerStaticInit251889ce0742eb7190e88e82b0f6ed10
         'GuzzleHttp\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
+        ),
+        'Gelf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/graylog2/gelf-php/src/Gelf',
         ),
         'App\\' => 
         array (

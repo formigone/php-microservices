@@ -3,7 +3,9 @@
     "silex/silex": "~2.0",
     "symfony/twig-bridge": "~2.0",
     "symfony/templating": "~2.0",
-    "guzzlehttp/guzzle": "~6.0"
+    "guzzlehttp/guzzle": "~6.0",
+    "graylog2/gelf-php": "^1.0",
+    "monolog/monolog": "^1.0"
   },
   "autoload": {
     "psr-4": {

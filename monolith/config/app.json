@@ -3,6 +3,9 @@
     "path": "/app/views"
   },
   "log": {
-    "path": "/logs/development.log"
+    "graylog": {
+      "host": "graylog.packt-micro",
+      "port": 12201
+    }
   }
 }

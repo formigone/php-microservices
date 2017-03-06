@@ -1,5 +1,11 @@
 {
   "db": {
     "path": "/app/app/data/db.json"
+  },
+  "log": {
+    "graylog": {
+      "host": "graylog.packt-micro",
+      "port": 12201
+    }
   }
 }

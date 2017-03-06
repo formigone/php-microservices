@@ -2,6 +2,7 @@
 
 namespace Mic\Users\Controllers;
 
+use Gelf\Logger;
 use Mic\Users\Services\UserService;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
@@ -29,31 +30,36 @@ class IndexController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
+        /** @var Logger $log */
+        $log = $app['logger'];
+        $log->info('User request');
 
-        $controller->post('/register', function (Request $req) {
+        $controller->post('/register', function (Request $req) use ($log) {
             $username = $req->get('username');
             $password = $req->get('password');
 
             try {
                 $res = $this->userService->register($username, $password);
             } catch (\Exception $exception) {
+                $log->error('Could not register user', ['username' => $username, 'password' => $password]);
                 return $this->error($exception->getMessage(), $exception->getCode());
             }
 
             return new JsonResponse(['success' => $res]);
         });
 
-        $controller->get('/validate/{username}/{password}', function ($username, $password) {
+        $controller->get('/validate/{username}/{password}', function ($username, $password) use ($log) {
             try {
                 $res = $this->userService->validate($username, $password);
             } catch (\Exception $exception) {
+                $log->error('Could not validate user', ['username' => $username, 'password' => $password]);
                 return $this->error($exception->getMessage(), $exception->getCode());
             }
 
             return new JsonResponse(['success' => $res]);
         });
 
-        $controller->post('/change-password', function (Request $req) {
+        $controller->post('/change-password', function (Request $req) use ($log) {
             $username = $req->get('username');
             $password = $req->get('password');
             $newPassword = $req->get('newPassword');
@@ -61,6 +67,7 @@ class IndexController implements ControllerProviderInterface
             try {
                 $res = $this->userService->changePassword($username, $password, $newPassword);
             } catch (\Exception $exception) {
+                $log->error('Could not change password', ['username' => $username, 'password' => $password, 'newPassword' => $newPassword]);
                 return $this->error($exception->getMessage(), $exception->getCode());
             }
 

@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Services\ArticleService;
 use App\Services\UserService;
+use Gelf\Logger;
 use Silex\Application;
 use Silex\Api\ControllerProviderInterface;
 
@@ -34,6 +35,10 @@ class ArticleController implements ControllerProviderInterface
     public function connect(Application $app)
     {
         $controller = $app['controllers_factory'];
+        /** @var Logger $log */
+        $log = $app['logger'];
+        $log->info('User request');
+
         $controller->get('/{story}/{title}', function (array $story) use ($app) {
             return $app['templating']->render(self::MAIN_TEMPLATE, $this->storyAction($story));
         })->convert('story', function ($storyId) {

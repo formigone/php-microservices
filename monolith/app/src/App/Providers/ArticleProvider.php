@@ -2,15 +2,18 @@
 
 namespace App\Providers;
 
-use Silex\Application;
-use Silex\Api\ControllerProviderInterface;
+use Monolog\Logger;
 
 class ArticleProvider
 {
     private $data;
 
-    public function __construct()
+    /** @var  Logger */
+    private $log;
+
+    public function __construct(Logger $log)
     {
+        $this->log = $log;
         $data = [
             [
                 'id' => substr(md5(0), 0, 6),

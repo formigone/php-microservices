@@ -3,24 +3,36 @@
 namespace App\Services;
 
 use App\Providers\ArticleProvider;
+use Monolog\Logger;
 
 class ArticleService
 {
     /** @var ArticleProvider */
     private $provider;
 
-    public function __construct(ArticleProvider $provider)
+    /** @var  Logger */
+    private $log;
+
+    public function __construct(ArticleProvider $provider, Logger $log)
     {
         $this->provider = $provider;
+        $this->log = $log;
     }
 
     /**
      * @param $storyId
      * @return mixed
+     * @throws \Exception
      */
     public function getStoryById($storyId)
     {
-        return $this->provider->getStoryById($storyId);
+        $story = $this->provider->getStoryById($storyId);
+        if (empty($story)) {
+            throw new \Exception('Story not found');
+        }
+
+        $this->log->info('Getting story by ID', ['storyId' => $storyId, 'story' => $story]);
+        return $story;
     }
 
     /**
@@ -50,6 +62,7 @@ class ArticleService
             $total = mt_rand(3, 6);
         }
 
+        $this->log->info('Generating random comments', ['total' => $total]);
         return $this->provider->genRandomComments($total);
     }
 }
